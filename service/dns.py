@@ -24,3 +24,17 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 
+import fabric
+import os
+import base64
+from fabric.api import sudo, run, env
+
+env.user = "root"
+env.key_filename = ["/root/.ssh/id_rsa"]
+#env.host_string = "192.168.1.121"
+#ret = run("ls -la").return_code
+
+class Dns():
+    def random_string(self, length):
+        random = base64.urlsafe_b64encode(os.urandom(length))
+        return random
