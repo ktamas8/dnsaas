@@ -13,6 +13,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 
 import pika
 import time
+import fabric
 
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
 channel = connection.channel()
@@ -32,11 +33,5 @@ channel.basic_consume(callback,queue='dns')
 
 print ' waiting for messages '
 channel.start_consuming()
-
-
-
-
-
-
 
 connection.close

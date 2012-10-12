@@ -14,15 +14,14 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 import pika
 
 connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-
 channel = connection.channel()
-
-channel.queue_declare(queue='hello')
-
+channel.queue_declare(queue='dns', durable=True)
 channel.basic_publish(exchange='',
-                      routing_key='hello',
-                      body='Hello Don')
+                      routing_key='dns',
+                      body='Hello DNS',
+                      properties=pika.BasicProperties(
+                         delivery_mode = 2,
+                      ))
 
-print " [x] Send 'Hello Don'"
-
+print " [x] Send 'Hello DNS'"
 connection.close
